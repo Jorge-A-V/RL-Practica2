@@ -40,3 +40,47 @@ Igual que del abnteior podemos sacar hiperparamentros bastante correctos de: htt
 
 Bueno crossvalidation no que es RL (me lo dijeron en una reunion del TFM) vamos a variar un poco el learning rate y las seeds para probar variaciones simulando el minimo cross validation
 
+---
+
+Se escogen los tres algoritmos para asi poder comparar un off-policy con un on-policy (actor crítico) y un actor crítico más sencillo
+
+#### DQN
+
+Es Q learning pero con Q table sustituida por una red neuronal
+
+Las transiciones (s,a,r,s) se guardan y se muestrean en minibatchs aleatoris. Rompe asi la correlacion temporal y permite reutilizar experiencias.
+
+La Target network es lo que solo se actualiza cada update_interval y asi se soluciona cambiar el objetivo cada vez que se entrena le red
+
+Tiene un factor de exploracion
+
+Tiene sentido dentro del problema porque la operacion max_Q sobre 4 valores discretos es simple y no requiere de trucos, de la misma forma, unn mlp pequeña sirve para cubrir las observaciones de nuevo discretas. Un reward denso favorece a las actualizaciones de DQN.
+
+#### PPO
+
+Con PPO se hacen n pasos con la politica actual, se estima la ventaja con la estimacion general (GAE) suvaizando la varianza (lo gcontrola el gae_lamda). La poplitica se actualiza haciendo un pequeño cliping para proteger el entorno y eso le da la estabilidad. Se entrena un critico aparte con MSE.
+
+Se puede usar poqeu soporta valores discretos y tiene naturaleza estocástica sin neceisdad del parametro de exploracion. PPO a mayores funciona en principio bastante bien out of the box por lo que no requiere de mucho ajuste de hiperparametros.
+
+Es más sensible a la cantidad de steps, tamaño de batch y el numero de epocas ya que suele requerir una cantidad de pasos más o menos considerables.
+
+#### A2C (Advantage actor critic)
+
+Se tiene un actor y un crítico. Cada N steps se calcula una ventaja y se actualiza. El actor tiene un gradiente estándar y un pequeño bonus de entropia y el critico es un MSE con los entornos calculados (no tiene ni clipiing ni nada de eso (mas rapido pero menos fino))
+
+Sirve para comparar con el PPO (mas bruto) y es relativamente rápido para probar. Es suficientemente simple para el problema de 4-8 como se tiene con el lunarlanding.
+
+Es mas simple más ruidoso y menos eficiente que el ppo, puede ser algo sensible al lr si por la entropía.
+
+---
+
+Con estos 3 modelos podemos curbir valores vs politica, complejidad y velocidad en las técnicas.
+
+---
+
+El ZOO para los hiperpartamentso es la mejor refeencia posible. Cambiamos un par de cosillas por simplicidad. En el mini cv no se usa multilples entornos por la complejidad computacionel y en el A2C se cambia el LR lineal decreciennte a uno constante para que tenga una naturaleza similar a las otras opciones (y para mantener y reutilizar la extructura del mini cv)
+
+En principio DQN si que está optimmizado para LunarLanding, los otros no necesariamente (50/50)
+
+## Resuldaos
+
