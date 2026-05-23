@@ -33,3 +33,10 @@ DQN: Como algoritmo referencia que usa el replay buffer para mejorar las actuaci
 PP0: es una opcion mas o menos modernilla, se sigue usando (al menos yo conozco qgente que la usa). Debería ser bastante estable y bastante robusto con hipers y funciona tanto discreto como Box (MlpPolicy en este caso)
 
 A2C: Por probar algo ligero y mas o menos rápido, aun lo escuche hace poco en un reunión.
+
+# Hiperparametros
+
+Igual que del abnteior podemos sacar hiperparamentros bastante correctos de: https://github.com/DLR-RM/rl-baselines3-zoo/blob/master/hyperparams (segun los comentarios indica el nivel de tuneado que tienen) Usaremos esos como base pero realizamos un mini CrossValidation de variaciones por probar.
+
+Bueno crossvalidation no que es RL (me lo dijeron en una reunion del TFM) vamos a variar un poco el learning rate y las seeds para probar variaciones simulando el minimo cross validation
+
