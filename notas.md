@@ -84,3 +84,13 @@ En principio DQN si que está optimmizado para LunarLanding, los otros no necesa
 
 ## Resuldaos
 
+
+Los resultados finales son que DQN consigue 211 con 67 de sttdev en 8 minutos, PPO 273 con 22 de stdev en 17 y A=C 56 y -91 con 160/170 de varianza en 2.
+
+En este caso PPO es el claro agnador, tiene mejor media con mucha menos desviacion dipica, pero sacrificas tiempo. DQN consigue resultados por encima de lo que se consideraba como threshold, pero con mas varianza.
+
+A2C no converge para esta politica, a mayores de las pruebas que estan ahora se han probado diferentes estrategias y no da entrenado, la inestabilidad que se decia antes del A2C hace que no funcione
+
+---
+
+PPO es estadisticamente mejor que el resto.
