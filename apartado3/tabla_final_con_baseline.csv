@@ -1,0 +1,4 @@
+algoritmo,reward,std
+Aleatorio,3.7,4.4
+DQN,241.5,59.9
+PPO,474.5,151.4
